@@ -1,3 +1,13 @@
+**docker-gcloud-cli**
+
+<!--toc:start-->
+- [About](#about)
+  - [Wait... but why?](#wait-but-why)
+- [Usage](#usage)
+- [Docker Tags](#docker-tags)
+- [Build and Publish](#build-and-publish)
+<!--toc:end-->
+
 ## About 
 
 A custom [gcloud sdk](https://cloud.google.com/sdk?hl=en) image with additional plugins.
@@ -77,6 +87,9 @@ gcloud_wrapper () {
 }
 ```
 
+> [!NOTE]
+> If you end up re-using my wrapper function, run `gcloud_wrapper -hh` to see the help message and usage details for the wrapper function itself.
+
 I also have a simple "wrapper" shell script:
 
 ```bash
@@ -111,6 +124,12 @@ gcloud-init () {
         docker run --rm -ti -u $(id -u):$(id -g) -v /etc/passwd:/etc/passwd -v $HOME/.config/gcloud:$HOME/.config/gcloud serpro69/google-cloud-cli gcloud init
 }
 ```
+
+## Docker Tags
+
+Image tags correspond to a hash of a git commit from which the given image was built. These tags are immutable.
+
+`latest` tag, on the other hand, is mutable and would rarely point to the latest commit tag. `latest` will often diverge, e.g. when the docker image is re-built to use latest version of base image, or upgrade additional components.
 
 ## Build and Publish
 
