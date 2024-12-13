@@ -9,6 +9,18 @@ help: ## Displays this help
 build: ## builds docker image
 	docker build -t serpro69/google-cloud-cli:build .
 
+buildx-latest:
+	docker buildx build \
+		--push \
+		--platform linux/arm64/v8,linux/amd64 \
+	  --tag serpro69/google-cloud-cli:latest .
+
+buildx-hash:
+	docker buildx build \
+		--push \
+		--platform linux/arm64/v8,linux/amd64 \
+	  --tag serpro69/google-cloud-cli:$(GIT_HASH) .
+
 clean: # clean up build image
 	docker rmi serpro69/google-cloud-cli:build
 
